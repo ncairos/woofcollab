@@ -61,7 +61,10 @@ class AdoptList extends Component {
             <Modal.Title>Woof Details</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <DogModal {...this.state.selectedDog} closeModalWindow={this.handleClose} />
+            <DogModal
+              {...this.state.selectedDog}
+              closeModalWindow={this.handleClose}
+            />
           </Modal.Body>
         </Modal>
       </section>

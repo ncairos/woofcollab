@@ -10,4 +10,10 @@ export default class Services {
 
   getAllCenters = () => this._service.get("/allCenters");
   getOneCenter = id => this._service.get(`/${id}`);
+  editCenter = (id, data) =>
+    this._service.post(`/edit/${id}`, data, {
+      headers: {
+        "content-type": "application/json"
+      }
+    });
 }

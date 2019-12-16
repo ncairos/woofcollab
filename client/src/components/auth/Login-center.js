@@ -1,32 +1,44 @@
 import React, { Component } from "react";
-import { Button, Form, Container, Card, Row, Col } from "react-bootstrap";
+import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import Service from "../../service/Auth_service";
 
-class SignupForm extends Component {
+class LoginCenterForm extends Component {
   constructor(props) {
     super(props);
     this._service = new Service();
-    this.state = { username: "", email: "", password: "", checked: false };
+    this.state = {
+      showToast: false,
+      toastText: "",
+      user: { username: "", password: "" }
+    };
   }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    const { username, email, password, checked } = this.state;
-    this._service
-      .signup(username, email, password, checked)
-      .then(theNewUser => {
-        this.props.setUser(theNewUser.data);
-        this.setState({ username: "", email: "", password: "" });
-        this.props.history.push("/") // REDIRECCIONAMIENTO
-      })
-      .catch(err => console.log(err.response.data.message));
-  };
 
   handleInputChange = e => {
     let { name, value } = e.target;
-    this.setState({ [name]: value, checked: e.target.checked });
+    this.setState({
+      user: { ...this.state.user, [name]: value }
+    });
   };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { username, password } = this.state.user;
+    this._service
+      .loginCenter(username, password)
+      .then(theLoggedUser => {
+        this.props.setUser(theLoggedUser.data);
+        this.setState({ username: "", password: "" });
+        this.props.history.push("/"); // REDIRECCIONAMIENTO
+      })
+      .catch(err => {
+        this.handleToastOpen(err.response.data.message);
+      });
+  };
+
+  handleToastClose = () => this.setState({ showToast: false, toastText: "" });
+  handleToastOpen = text => this.setState({ showToast: true, toastText: text });
 
   render() {
     return (
@@ -37,7 +49,7 @@ class SignupForm extends Component {
           style={{ width: "50vw", marginTop: "50px" }}
         >
           <Card.Header style={{ textAlign: "center" }}>
-            USER SIGN UP
+            CENTER LOGIN
           </Card.Header>
           <Card.Body>
             <Card.Text>
@@ -52,15 +64,6 @@ class SignupForm extends Component {
                   />
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    onChange={this.handleInputChange}
-                    value={this.state.email}
-                  />
-                </Form.Group>
-                <Form.Group>
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
@@ -69,22 +72,25 @@ class SignupForm extends Component {
                     value={this.state.password}
                   />
                 </Form.Group>
-                <Form.Group id="formGridCheckbox">
-                  <Form.Check
-                    type="checkbox"
-                    label="Check as a Center"
-                    name="checked"
-                    onChange={this.handleInputChange}
-                  />
-                </Form.Group>
                 <Row>
                   <Col
-                    style={{ display: "flex", justifyContent: "center"}}
+                    style={{ display: "flex", justifyContent: "center" }}
                     md={12}
                   >
                     <Button variant="light" type="submit">
-                      Sign Up
+                      Login
                     </Button>
+                  </Col>
+                  <Col
+                    style={{ display: "flex", justifyContent: "center", textTransform: "uppercase" }}
+                    md={12}
+                  >
+                    <Link
+                      style={{ marginTop: "15px", color: "#FFF" }}
+                      to="/loginUser"
+                    >
+                      Back to Login as a User
+                    </Link>
                   </Col>
                 </Row>
               </Form>
@@ -96,4 +102,4 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm;
+export default LoginCenterForm;

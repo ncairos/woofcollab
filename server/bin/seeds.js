@@ -1515,66 +1515,50 @@ let dog = [
   }
 ];
 
-Dog.collection.drop();
+Dog.collection.drop().catch(err => console.log(err, "catch de drop dog"));
 Center.collection
   .drop()
-
   .then(() => {
     return Center.create(center);
   })
+  .catch(err => console.log(err, "center create"))
   .then(centerCreated => {
-    console.log(
-      `${centerCreated.length} Centers created`
-    );
+    console.log(`${centerCreated.length} Centers created`);
     return Dog.create(dog).then(dogsCreated => {
-    console.log(`${dogsCreated.length} Dogs created`);
+      console.log(`${dogsCreated.length} Dogs created`);
       dogsCreated.forEach(dogs => {
         Center.findOne({ username: dogs.centerName })
-        .then(center => {
-          dogs.center = new mongoose.Types.ObjectId(center._id);
-          dogs.save().then(() => {
-            mongoose.disconnect();
+          .then(center => {
+            dogs.center = new mongoose.Types.ObjectId(center._id);
+
+            dogs
+              .save()
+              .then(dgs => {
+                Center.findByIdAndUpdate(
+                  center._id,
+                  {
+                    $addToSet: { walks: dgs._id }
+                  },
+                  { new: true }
+                )
+                  .then(center => {
+                    console.log("ENTRA EN EL THEN DE UPDATE " + center);
+                    // mongoose.disconnect();
+                  })
+                  .catch(err => console.log(err, "foking update center"));
+
+                // console.log("ID DEL PERRO " + dgs.center);
+                // console.log("ID DEL CENTRO " + center._id);
+              })
+              .catch(err => console.log(err));
           })
-        .catch(err => console.log(err))
-        });
+          .catch(err => console.log(err, "puto findOne and catch"));
       });
+      //
     });
   })
+
   .catch(err => {
     mongoose.disconnect();
     throw err;
   });
-
-// Center.deleteMany()
-//   .then(() => {
-//     return Center.create(center);
-//   })
-//   .then(centerCreated => {
-//     console.log(
-//       `${centerCreated.length} Center created with the following id:`
-//     );
-//     console.log(centerCreated.map(u => u._id));
-//   })
-//   .then(() => {
-//     mongoose.disconnect();
-//   })
-//   .catch(err => {
-//     mongoose.disconnect();
-//     throw err;
-//   });
-
-// Dog.deleteMany()
-//   .then(() => {
-//     return Dog.create(dog);
-//   })
-//   .then(dogCreated => {
-//     console.log(`${dogCreated.length} Dog created with the following id:`);
-//     console.log(dogCreated.map(u => u._id));
-//   })
-//   .then(() => {
-//     mongoose.disconnect();
-//   })
-//   .catch(err => {
-//     mongoose.disconnect();
-//     throw err;
-//   });

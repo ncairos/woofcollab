@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Dog = require("./Dog.model")
 
 const centerSchema = new Schema(
   {
@@ -21,12 +20,17 @@ const centerSchema = new Schema(
     },
     calendar: [String],
     walks: [{ type: Schema.Types.ObjectId, ref: "Dog" }],
-    events: [{ type: Schema.Types.ObjectId, ref: "Event" }]
+    events: [{ type: Schema.Types.ObjectId, ref: "Event" }],
+    role: {
+      type: String,
+      default: "center"
+    }
   },
+
   {
     timestamps: true
   }
 );
 
-const CenterModel = mongoose.model("Center", centerSchema);
-module.exports = CenterModel;
+const Center = mongoose.model("Center", centerSchema);
+module.exports = Center;

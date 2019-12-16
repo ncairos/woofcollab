@@ -4,20 +4,27 @@ import { Switch, Route } from "react-router-dom";
 import Service from "./service/Auth_service";
 
 //-----NAVIGATION COMPONENTS-----//
-import NavigationBar from "./components/Navbar";
+import NavigationBar from "./components/navbar";
+
+//-----INDEX COMPONENTS-----//
+import IndexPage from "./components/index-page";
 
 //-----CENTER COMPONENTS-----//
 import CenterList from "./components/centers/center-list";
 import CenterDetails from "./components/centers/center-details";
-import CenterProfile from "./components/profiles/center-profile"
+
+//-----PROFILES COMPONENTS-----//
+import CenterProfile from "./components/profiles/center-profile";
+import UserProfile from "./components/profiles/user-profile";
+import DogProfile from "./components/profiles/dog-profile"
 
 //-----DOG COMPONENTS-----//
 import DogList from "./components/dogs/adoption-List";
 
 //-----AUTH COMPONENTS-----//
 import Signup from "./components/auth/Signup";
-import Login from "./components/auth/Login";
-
+import LoginUser from "./components/auth/Login-user";
+import LoginCenter from "./components/auth/Login-center";
 
 class App extends Component {
   constructor() {
@@ -27,6 +34,7 @@ class App extends Component {
   }
 
   setTheUser = user => {
+    console.log(user);
     this.setState({ loggedInUser: user });
   };
 
@@ -46,7 +54,6 @@ class App extends Component {
 
   render() {
     this.fetchUser();
-
     return (
       <>
         <NavigationBar
@@ -54,12 +61,25 @@ class App extends Component {
           setUser={this.setTheUser}
         />
         <Switch>
-          <Route path="/centers/:id" component={CenterDetails} />
+          <Route exact path="/" component={IndexPage} />
           <Route
-            exact
-            path="/centers-profile"
-            render={() => <CenterProfile loggedInUser={this.state.loggedInUser} />}
+            path="/signup"
+            render={match => <Signup setUser={this.setTheUser} {...match} />}
           />
+          <Route
+            path="/loginUser"
+            render={match => <LoginUser setUser={this.setTheUser} {...match} />}
+          />
+          <Route
+            path="/loginCenter"
+            render={match => (
+              <LoginCenter setUser={this.setTheUser} {...match} />
+            )}
+          />
+          <Route path="/centers/:id" component={CenterDetails} />
+          <Route path="/dog/:id" component={DogProfile} />
+          <Route exact path="/user-profile/:id" component={UserProfile} />
+          <Route exact path="/center-profile/:id" component={CenterProfile} />
           <Route
             exact
             path="/centers"
@@ -70,15 +90,6 @@ class App extends Component {
             path="/dogs"
             render={() => <DogList loggedInUser={this.state.loggedInUser} />}
           />
-          <Route
-            path="/signup"
-            render={match => <Signup setUser={this.setTheUser} {...match} />}
-          />
-          <Route
-            path="/login"
-            render={match => <Login setUser={this.setTheUser} {...match} />}
-          />
-          <Route path="/logout" />
         </Switch>
       </>
     );
@@ -86,3 +97,5 @@ class App extends Component {
 }
 
 export default App;
+
+//render={() => this.state.loggedInUser.role === "center" ? <CenterList loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />}

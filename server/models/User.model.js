@@ -8,6 +8,8 @@ const userSchema = new Schema(
     password: String,
     name: String,
     address: String,
+    contact: Number,
+    about: String,
     imgPath: {
       type: String
     },
@@ -16,12 +18,17 @@ const userSchema = new Schema(
     },
     calendar: [String],
     walks: [{ type: Schema.Types.ObjectId, ref: "Dog" }],
-    events: [{ type: Schema.Types.ObjectId, ref: "Event" }]
+    events: [{ type: Schema.Types.ObjectId, ref: "Event" }],
+    
+    role: {
+      type: String,
+      default: "user"
+    },
   },
   {
     timestamps: true
   }
 );
 
-const UserModel = mongoose.model("User", userSchema);
-module.exports = UserModel;
+const User = mongoose.model("User", userSchema);
+module.exports = User;

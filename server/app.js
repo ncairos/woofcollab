@@ -13,5 +13,6 @@ require("./configs/session.config")(app);
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/center", require("./routes/center.routes"));
 app.use("/api/dog", require("./routes/dog.routes"));
+app.use("/api/files", require("./routes/files.routes"));
 
 module.exports = app;

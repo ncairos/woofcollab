@@ -90,7 +90,7 @@ class Map extends Component {
           </>
         ))}
         {this.state.selectedCenter && (
-          <InfoWindow position={this.state.selectedCenter}>
+          <InfoWindow position={this.state.selectedCenter} onCloseClick={() => { this.setCenter(null) }}>
             <small>
               {this.state.selectedCenter.lat}, {(this.state.selectedCenter.lng)}
             </small>
