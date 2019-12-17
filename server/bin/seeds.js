@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const mongoose = require("../configs/mongoose.config");
 const bcrypt = require("bcrypt");
+
 //const User = require("../models/User.model");
 //const Event = require("../models/Event.model");
 const Dog = require("../models/Dog.model");
@@ -1515,52 +1516,55 @@ let dog = [
   }
 ];
 
-Dog.collection.drop();
-Center.collection
+Dog.collection
   .drop()
   .then(() => {
-    return Center.create(center);
-  })
-  .catch(err => console.log(err, "center create"))
-  .then(centerCreated => {
-    console.log(`${centerCreated.length} Centers created`);
-    return Dog.create(dog)
-      .then(dogsCreated => {
-        console.log(`${dogsCreated.length} Dogs created`);
-        dogsCreated.forEach(dogs => {
-          Center.findOne({ username: dogs.centerName })
-            .then(center => {
-              dogs.center = new mongoose.Types.ObjectId(center._id);
-
-              dogs
-                .save()
-                .then(dgs => {
-                  Center.findByIdAndUpdate(
-                    center._id,
-                    {
-                      $addToSet: { walks: dgs._id }
-                    },
-                    { new: true }
-                  )
-                    .then(center => {
-                      console.log("ENTRA EN EL THEN DE UPDATE " + center);
-                      // mongoose.disconnect();
-                    })
-                    .catch(err => console.log(err, "foking update center"));
-
-                  // console.log("ID DEL PERRO " + dgs.center);
-                  // console.log("ID DEL CENTRO " + center._id);
-                })
-                .catch(err => console.log(err));
-            })
-            .catch(err => console.log(err, "puto findOne and catch"));
-        });
-        mongoose.disconnect();
+    Center.collection
+      .drop()
+      .then(() => {
+        return Center.create(center);
       })
-      .catch(err => console.log(err));
-  })
 
+      .catch(err => console.log(err, "center create"))
+      .then(centerCreated => {
+        console.log(`${centerCreated.length} Centers created`);
+        return Dog.create(dog)
+          .then(dogsCreated => {
+            console.log(`${dogsCreated.length} Dogs created`);
+            dogsCreated.forEach(dogs => {
+              Center.findOne({ username: dogs.centerName })
+                .then(center => {
+                  console.log("ESTA ENTANDO AQUIIIII");
+                  dogs.center = new mongoose.Types.ObjectId(center._id);
+
+                  dogs
+                    .save()
+                    .then(dgs => {
+                      Center.findByIdAndUpdate(
+                        center._id,
+                        {
+                          $addToSet: { walks: dgs._id }
+                        },
+                        { new: true }
+                      )
+                        .then(center => {
+                          console.log("ENTRA EN EL THEN DE UPDATE " + center);
+                          // mongoose.disconnect();
+                        })
+                        .catch(err => console.log(err, "foking update center"));
+
+                      // console.log("ID DEL PERRO " + dgs.center);
+                      // console.log("ID DEL CENTRO " + center._id);
+                    })
+                    .catch(err => console.log(err));
+                })
+                .catch(err => console.log(err, "puto findOne and catch"));
+            });
+            // mongoose.disconnect();
+          })
+          .catch(err => console.log(err));
+      });
+  })
   .catch(err => {
-    mongoose.disconnect();
-    throw err;
+    console.log(err);
   });
