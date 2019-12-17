@@ -14,7 +14,6 @@ router.get("/allDogs", (req, res) => {
 //----------DETAILS DOG----------//
 router.get("/:id", (req, res) => {
   const dogId = req.params.id;
-
   Dog.findById(dogId)
     .populate("center")
     .then(theDog => {
