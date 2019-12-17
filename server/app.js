@@ -16,4 +16,8 @@ app.use("/api/dog", require("./routes/dog.routes"));
 app.use("/api/files", require("./routes/files.routes"));
 app.use("/api/calendar", require("./routes/calendar.routes"));
 
+app.use((req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
+
 module.exports = app;
