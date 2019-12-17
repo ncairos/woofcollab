@@ -19,6 +19,7 @@ const userSchema = new Schema(
       type: String
     },
     calendar: [{ type: Schema.Types.ObjectId, ref: "Calendar" }],
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
     walks: [{ type: Schema.Types.ObjectId, ref: "Dog" }],
     events: [{ type: Schema.Types.ObjectId, ref: "Event" }],
 

@@ -108,6 +108,7 @@ router.get("/profile/:id", (req, res) => {
   const dog = req.params.id;
   Dog.findById(dog)
     .populate("calendar")
+    .populate("comments")
     .then(theDog => res.json(theDog))
     .catch(err => console.log("DB error", err));
 });

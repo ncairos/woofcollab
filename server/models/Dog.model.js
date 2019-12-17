@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Calendar = require("./Calendar.model");
+const Comment = require("./Comment.model")
 
 const dogSchema = new Schema(
   {
@@ -24,7 +25,7 @@ const dogSchema = new Schema(
     imgName: {
       type: String
     },
-    comments: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
     calendar: [{ type: Schema.Types.ObjectId, ref: "Calendar" }]
   },
   { timestamps: true }

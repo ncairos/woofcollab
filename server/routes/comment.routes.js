@@ -1,31 +1,31 @@
 const express = require("express");
 const router = express.Router();
-const Calendar = require("../models/Calendar.model");
+const Comment = require("../models/Comment.model");
 const Dog = require("../models/Dog.model");
 const User = require("../models/User.model");
 
 router.post("/new/:id", (req, res) => {
   const user = req.user;
   const dog = req.params.id;
-  const { title, start, end } = req.body;
+  const { name, message } = req.body;
 
-  Calendar.create({ title, start, end, dog: dog, user: user })
-    .then(theCalendar => {
+  Comment.create({ name, message, dog: dog, user: user })
+    .then(theComment => {
       Dog.findByIdAndUpdate(
         dog,
         {
-          $addToSet: { calendar: theCalendar._id }
+          $addToSet: { comments: theComment._id }
         },
         { new: true }
       ).then(dog => {
         User.findByIdAndUpdate(
           user,
           {
-            $addToSet: { calendar: theCalendar._id }
+            $addToSet: { comments: theComment._id }
           },
-          { new: true } 
+          { new: true }
         )
-          .then(user => res.json({ theCalendar, dog, user }))
+          .then(user => res.json({ theComment, dog, user }))
           .catch(err => console.log("DB error", err));
       });
     })

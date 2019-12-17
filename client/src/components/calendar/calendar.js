@@ -99,12 +99,13 @@ class MyCalendar extends Component {
                 <Form.Control
                   type="text"
                   name="title"
+                  placeholder="Full Name"
                   onChange={this.handleInputChange}
                   value={this.state.myEventsList.title}
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Start Date</Form.Label>
+                <Form.Label>Pick a Start Date</Form.Label>
                 <Form.Control
                   type="date"
                   name="start"
@@ -113,7 +114,7 @@ class MyCalendar extends Component {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>End Date</Form.Label>
+                <Form.Label>Pick an End Date</Form.Label>
                 <Form.Control
                   type="date"
                   name="end"
