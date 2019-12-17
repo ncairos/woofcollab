@@ -3,7 +3,7 @@ import axios from "axios";
 export default class Services {
   constructor() {
     this._service = axios.create({
-      baseURL: `${proccess.env.REACT_APP_URL}/api/files`,
+      baseURL: `${process.env.REACT_APP_URL}/api/files`,
       withCredentials: true // RUTAS PERSISTENTES
     });
   }
