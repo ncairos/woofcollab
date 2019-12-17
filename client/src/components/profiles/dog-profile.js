@@ -48,7 +48,7 @@ class DogProfile extends React.Component {
                           <h2>This is {this.state.dog.name}</h2>
                         </Card.Title>
                         <Card.Text>
-                          <strong>Sex:</strong> {this.state.dog.sex}
+                          <strong>SexOOOOOO:</strong> {this.state.dog.sex}
                           <br></br>
                           <strong>Age:</strong> {this.state.dog.age}
                           <br></br>
