@@ -34,7 +34,7 @@ class CenterList extends Component {
         <Container>
           <Row>
             <Col md={6}>
-              <div style={{ width: "100%", height: "85vh" }}>
+              <div style={{ width: "100%", height: "85vh", boxShadow: "10px 10px 15px 0px rgba(0, 0, 0, 0.75)" }}>
                 <WrappedMap
                   googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBdergxMgHic2LH7s_ou7nmShy6smGNnPY`}
                   loadingElement={<div style={{ height: "100%" }} />}

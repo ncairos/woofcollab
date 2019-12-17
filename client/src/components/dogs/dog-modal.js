@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-
 const DogModal = props => {
   return (
     <Container>
@@ -10,7 +9,10 @@ const DogModal = props => {
         <Col style={{ textAlign: "center" }} md={12}>
           <img src={props.imgPath} alt={props.imgName} />
           <br></br>
-          <h3>{props.name}</h3>
+          <Link to={`/dog/${props._id}`}>
+            <h3 style={{ textTransform: "uppercase" }}>{props.name}</h3>
+          </Link>
+
           <hr></hr>
           <p>
             <strong>Age: </strong>
@@ -37,7 +39,7 @@ const DogModal = props => {
         {/* <Button variant="dark">
           MORE<br></br>WOOF!
         </Button> */}
-        <Link to={`/dog/${props._id}`}>MORE WOOF</Link>
+        {/* <Link to={`/dog/${props._id}`}>MORE WOOF</Link> */}
       </Row>
     </Container>
   );

@@ -44,15 +44,15 @@ class LoginCenterForm extends Component {
     return (
       <Container style={{ display: "flex", justifyContent: "center" }}>
         <Card
-          bg="dark"
+          className="signup-login"
           text="white"
           style={{ width: "50vw", marginTop: "50px" }}
         >
-          <Card.Header style={{ textAlign: "center" }}>
+          <Card.Header style={{ textAlign: "center", color: "black" }}>
             CENTER LOGIN
           </Card.Header>
           <Card.Body>
-            <Card.Text>
+            <Card.Text style={{ color: "black" }}>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>
@@ -82,11 +82,15 @@ class LoginCenterForm extends Component {
                     </Button>
                   </Col>
                   <Col
-                    style={{ display: "flex", justifyContent: "center", textTransform: "uppercase" }}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      textTransform: "uppercase"
+                    }}
                     md={12}
                   >
                     <Link
-                      style={{ marginTop: "15px", color: "#FFF" }}
+                      style={{ marginTop: "15px", color: "black" }}
                       to="/loginUser"
                     >
                       Back to Login as a User

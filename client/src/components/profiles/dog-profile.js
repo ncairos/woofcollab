@@ -1,6 +1,8 @@
 import React from "react";
 import dogService from "../../service/Dog_service";
+import calendarService from "../../service/Calendar_service";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class DogProfile extends React.Component {
   constructor(props) {
@@ -26,7 +28,12 @@ class DogProfile extends React.Component {
           <section>
             <Row>
               <Col md={12}>
-                <Card style={{ height: "35vh", backgroundColor: "rgba(255,255, 255, 0.5)"}} >
+                <Card
+                  style={{
+                    height: "35vh",
+                    backgroundColor: "rgba(255,255, 255, 0.5)"
+                  }}
+                >
                   <Row>
                     <Col md={4}>
                       <Card.Img
@@ -37,7 +44,7 @@ class DogProfile extends React.Component {
                     </Col>
                     <Col md={8}>
                       <Card.Body>
-                        <Card.Title style={{textTransform: "uppercase"}}>
+                        <Card.Title style={{ textTransform: "uppercase" }}>
                           <h2>This is {this.state.dog.name}</h2>
                         </Card.Title>
                         <Card.Text>
@@ -68,19 +75,44 @@ class DogProfile extends React.Component {
             </Row>
             <Row>
               <Col md={6}>
-                <Card style={{ height: "50vh", backgroundColor: "rgba(255,255, 255, 0.5)" }}>
+                <Card
+                  style={{
+                    height: "50vh",
+                    backgroundColor: "rgba(255,255, 255, 0.5)"
+                  }}
+                >
                   <Col md={8}>
                     <Card.Body>
                       <Card.Title>
                         <h3>PROXIMAMENTE CALENDARIO DE CITAS</h3>
                       </Card.Title>
-                      <Card.Text></Card.Text>
+                      <Card.Text>
+                        <Link to={`/newCalendar/${this.state.dog._id}`}>
+                          Book an Appointment
+                        </Link>
+                        <br></br>
+                        {this.state.dog.calendar
+                          ? this.state.dog.calendar.map(elm => (
+                              <p>
+                                <strong style={{ textTransform: "uppercase" }}>
+                                  {elm.title} | |{" "}
+                                </strong>
+                                {elm.start}
+                              </p>
+                            ))
+                          : null}
+                      </Card.Text>
                     </Card.Body>
                   </Col>
                 </Card>
               </Col>
               <Col md={6}>
-                <Card style={{ height: "50vh", backgroundColor: "rgba(255,255, 255, 0.5)" }}>
+                <Card
+                  style={{
+                    height: "50vh",
+                    backgroundColor: "rgba(255,255, 255, 0.5)"
+                  }}
+                >
                   <Col md={8}>
                     <Card.Body>
                       <Card.Title>

@@ -56,7 +56,7 @@ class CenterDetails extends Component {
                     <Card.Body>
                       <Card.Title className="woof-list">WOOF LIST</Card.Title>
                       <Card.Text>
-                        <Col className="dog-section">
+                        <Col className="dog-section2">
                           {this.state.center.walks
                             ? this.state.center.walks.map(elm => (
                                 <DogSectionPub key={elm._id} {...elm} />

@@ -12,11 +12,12 @@ import IndexPage from "./components/index-page";
 //-----CENTER COMPONENTS-----//
 import CenterList from "./components/centers/center-list";
 import CenterDetails from "./components/centers/center-details";
+import MyCalendar from "./components/calendar/calendar";
 
 //-----PROFILES COMPONENTS-----//
 import CenterProfile from "./components/profiles/center-profile";
 import UserProfile from "./components/profiles/user-profile";
-import DogProfile from "./components/profiles/dog-profile"
+import DogProfile from "./components/profiles/dog-profile";
 
 //-----DOG COMPONENTS-----//
 import DogList from "./components/dogs/adoption-List";
@@ -76,6 +77,7 @@ class App extends Component {
               <LoginCenter setUser={this.setTheUser} {...match} />
             )}
           />
+          <Route path="/newCalendar/:id" component={MyCalendar} />
           <Route path="/centers/:id" component={CenterDetails} />
           <Route path="/dog/:id" component={DogProfile} />
           <Route exact path="/user-profile/:id" component={UserProfile} />

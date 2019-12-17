@@ -1,4 +1,3 @@
-
 h1 {
   display: flex;
   justify-content: center;
@@ -6,7 +5,7 @@ h1 {
 }
 
 body {
-  background-image: url('Artboard 1@108x.png');
+  background-image: url("BG2.png");
   background-size: cover;
   background-attachment: fixed;
 }
@@ -16,7 +15,7 @@ section {
 }
 
 nav a {
-  color: white
+  color: white;
 }
 
 .center-card {
@@ -63,6 +62,12 @@ nav a {
 }
 
 .dog-section {
+  max-height: 50vh;
+  margin-bottom: 10px;
+  overflow: scroll;
+}
+
+.dog-section2 {
   max-height: 75vh;
   margin-bottom: 10px;
   overflow: scroll;
@@ -71,4 +76,14 @@ nav a {
 .woof-list {
   display: flex;
   justify-content: space-between;
+}
+
+.signup-login {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.75);
+}
+
+.calendar-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.75);
 }

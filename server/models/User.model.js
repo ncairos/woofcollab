@@ -11,19 +11,21 @@ const userSchema = new Schema(
     contact: Number,
     about: String,
     imgPath: {
-      type: String
+      type: String,
+      default:
+        "https://res.cloudinary.com/woofcollab/image/upload/v1576490292/dogs/img.png.png"
     },
     imgName: {
       type: String
     },
-    calendar: [String],
+    calendar: [{ type: Schema.Types.ObjectId, ref: "Calendar" }],
     walks: [{ type: Schema.Types.ObjectId, ref: "Dog" }],
     events: [{ type: Schema.Types.ObjectId, ref: "Event" }],
-    
+
     role: {
       type: String,
       default: "user"
-    },
+    }
   },
   {
     timestamps: true

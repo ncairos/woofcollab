@@ -18,7 +18,7 @@ class SignupForm extends Component {
       .then(theNewUser => {
         this.props.setUser(theNewUser.data);
         this.setState({ username: "", email: "", password: "" });
-        this.props.history.push("/") // REDIRECCIONAMIENTO
+        this.props.history.push("/"); // REDIRECCIONAMIENTO
       })
       .catch(err => console.log(err.response.data.message));
   };
@@ -32,15 +32,15 @@ class SignupForm extends Component {
     return (
       <Container style={{ display: "flex", justifyContent: "center" }}>
         <Card
-          bg="dark"
+          className="signup-login"
           text="white"
           style={{ width: "50vw", marginTop: "50px" }}
         >
-          <Card.Header style={{ textAlign: "center" }}>
+          <Card.Header style={{ textAlign: "center", color: "black" }}>
             USER SIGN UP
           </Card.Header>
-          <Card.Body>
-            <Card.Text>
+          <Card.Body >
+            <Card.Text style={{color: "black"}}>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>
@@ -79,7 +79,7 @@ class SignupForm extends Component {
                 </Form.Group>
                 <Row>
                   <Col
-                    style={{ display: "flex", justifyContent: "center"}}
+                    style={{ display: "flex", justifyContent: "center" }}
                     md={12}
                   >
                     <Button variant="light" type="submit">

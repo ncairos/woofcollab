@@ -32,8 +32,7 @@ class LoginUserForm extends Component {
         this.setState({ username: "", password: "" });
         this.props.history.push("/"); // REDIRECCIONAMIENTO
       })
-      .catch(err => {
-      });
+      .catch(err => {});
   };
 
   handleToastClose = () => this.setState({ showToast: false, toastText: "" });
@@ -42,10 +41,16 @@ class LoginUserForm extends Component {
   render() {
     return (
       <Container style={{ display: "flex", justifyContent: "center" }}>
-        <Card bg="dark" text="white" style={{ width: "50vw", marginTop: "50px"}}>
-          <Card.Header style={{ textAlign: "center",  }}>USER LOGIN</Card.Header>
+        <Card
+          className="signup-login"
+          text="white"
+          style={{ width: "50vw", marginTop: "50px" }}
+        >
+          <Card.Header style={{ textAlign: "center", color: "black" }}>
+            USER LOGIN
+          </Card.Header>
           <Card.Body>
-            <Card.Text >
+            <Card.Text style={{ color: "black" }}>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>
@@ -78,7 +83,16 @@ class LoginUserForm extends Component {
                     style={{ display: "flex", justifyContent: "center" }}
                     md={12}
                   >
-                    <Link to="/loginCenter" style={{ marginTop: "15px", color: "#FFF", textTransform: "uppercase"}}>Login as a Center</Link>
+                    <Link
+                      to="/loginCenter"
+                      style={{
+                        marginTop: "15px",
+                        color: "black",
+                        textTransform: "uppercase"
+                      }}
+                    >
+                      Login as a Center
+                    </Link>
                   </Col>
                 </Row>
               </Form>

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Center = require("./Center.model");
+const Calendar = require("./Calendar.model");
 
 const dogSchema = new Schema(
   {
@@ -17,17 +17,17 @@ const dogSchema = new Schema(
     personality: String,
     description: String,
     imgPath: {
-      type: String
+      type: String,
+      default:
+        "https://res.cloudinary.com/woofcollab/image/upload/v1576490292/dogs/img.png.png"
     },
     imgName: {
       type: String
     },
     comments: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    calendar: [String]
+    calendar: [{ type: Schema.Types.ObjectId, ref: "Calendar" }]
   },
-  {
-    timestamps: true
-  }
+  { timestamps: true }
 );
 
 const Dog = mongoose.model("Dog", dogSchema);

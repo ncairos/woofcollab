@@ -13,7 +13,8 @@ const centerSchema = new Schema(
     address: String,
     zipcode: Number,
     imgPath: {
-      type: String
+      type: String,
+      default: "https://media.mnn.com/assets/images/2017/04/group-of-dogs-different-breeds.jpg.653x0_q80_crop-smart.jpg"
     },
     imgName: {
       type: String

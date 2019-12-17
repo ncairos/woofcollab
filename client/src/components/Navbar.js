@@ -47,6 +47,11 @@ class NavigationBar extends Component {
                 </Link>
               </Nav.Link>
               <Nav.Link as="li">
+                <Link to={"/center-calendar"} >
+                  Calendar
+                </Link>
+              </Nav.Link>
+              <Nav.Link as="li">
                 <Link to="/dogs">Adoption</Link>
               </Nav.Link>
             </Nav>
