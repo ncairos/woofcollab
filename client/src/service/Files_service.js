@@ -1,12 +1,12 @@
-import axios from 'axios'
+import axios from "axios";
 
 export default class Services {
+  constructor() {
+    this._service = axios.create({
+      baseURL: `${proccess.env.REACT_APP_URL}/api/files`,
+      withCredentials: true // RUTAS PERSISTENTES
+    });
+  }
 
-    constructor() {
-        this._service = axios.create({
-          baseURL: `${REACT_APP_URL}/api/files`,
-          withCredentials: true // RUTAS PERSISTENTES
-        });
-    }
-
-    handleUpload = theFile => this._service.post('/upload', theFile)}
+  handleUpload = theFile => this._service.post("/upload", theFile);
+}
