@@ -20,7 +20,7 @@ class SignupForm extends Component {
         this.setState({ username: "", email: "", password: "" });
         this.props.history.push("/"); // REDIRECCIONAMIENTO
       })
-      .catch(err => console.log(err.response.data.message));
+      .catch(err => console.log({ err }));
   };
 
   handleInputChange = e => {
@@ -39,8 +39,8 @@ class SignupForm extends Component {
           <Card.Header style={{ textAlign: "center", color: "black" }}>
             USER SIGN UP
           </Card.Header>
-          <Card.Body >
-            <Card.Text style={{color: "black"}}>
+          <Card.Body>
+            <Card.Text style={{ color: "black" }}>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>
