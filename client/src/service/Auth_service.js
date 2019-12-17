@@ -28,5 +28,8 @@ export default class Services {
     });
 
   logout = () => this._service.post("/logout");
-  loggedin = () => this._service.get("/loggedin");
+  loggedin = () => {
+    console.log(`${process.env.REACT_APP_URL}/auth`);
+    return this._service.get("/loggedin");
+  };
 }
