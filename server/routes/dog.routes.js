@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Dog = require("../models/Dog.model");
 const Center = require("../models/Center.model");
+const User = require("../models/User.model")
 
 
 //----------ALL DOGS----------//
@@ -112,6 +113,13 @@ router.get("/profile/:id", (req, res) => {
   Dog.findById(dog)
 
     .populate("calendar")
+    .populate({
+      path: "calendar",
+      populate: {
+        path: "user",
+        model: "User"
+      }
+    })
     .populate("comments")
     .then(theDog => res.json(theDog))
     .catch(err => console.log("DB error", err));

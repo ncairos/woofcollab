@@ -126,10 +126,13 @@ class DogProfile extends React.Component {
                       {this.state.dog.calendar
                         ? this.state.dog.calendar.map(elm => (
                             <p>
-                              <strong style={{ textTransform: "uppercase" }}>
-                                {elm.title} |{" "}
-                              </strong>
-                              {elm.start}
+                              <strong> Booked User: </strong>
+                              {elm.user.name} <br></br>
+                              <strong> Date: </strong>
+                              {elm.start.substr(0, 10)} |
+                              <strong> Booking Name: </strong>
+                              {elm.title}
+                              
                             </p>
                           ))
                         : null}
