@@ -12,6 +12,7 @@ const eventSchema = new Schema(
     date: Date,
     time: String,
     calendar: [String],
+    address: String
   },
   {
     timestamps: true

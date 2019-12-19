@@ -17,17 +17,19 @@ router.post("/new/:id", (req, res) => {
           $addToSet: { comments: theComment._id }
         },
         { new: true }
-      ).then(dog => {
-        User.findByIdAndUpdate(
-          user,
-          {
-            $addToSet: { comments: theComment._id }
-          },
-          { new: true }
-        )
-          .then(user => res.json({ theComment, dog, user }))
-          .catch(err => console.log("DB error", err));
-      });
+      )
+        .populate("dog")
+        .then(dog => {
+          User.findByIdAndUpdate(
+            user,
+            {
+              $addToSet: { comments: theComment._id }
+            },
+            { new: true }
+          )
+            .then(user => res.json({ theComment, dog, user }))
+            .catch(err => console.log("DB error", err));
+        });
     })
     .catch(err => console.log("DB error", err));
 });

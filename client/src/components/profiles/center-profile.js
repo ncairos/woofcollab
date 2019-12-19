@@ -19,7 +19,20 @@ class CenterProfile extends React.Component {
     };
   }
 
-  handleSubmit = data => {
+  componentDidMount = () => {
+    this.centerInfo();
+  };
+
+  centerInfo = () => {
+    const centerId = this.props.match.params.id;
+    this._centerService
+      .getOneCenter(centerId)
+      .then(theCenter => this.setState({ center: theCenter.data }))
+      .catch(err => console.log(err));
+  };
+
+  handleSubmit = (e, data) => {
+    e.preventDefault();
     const centerId = this.state.center._id;
     this._centerService
       .editCenter(centerId, data)
@@ -32,19 +45,14 @@ class CenterProfile extends React.Component {
       });
   };
 
-  componentDidMount = () => {
-    const centerId = this.props.match.params.id;
-    this._centerService
-      .getOneCenter(centerId)
-      .then(theCenter => this.setState({ center: theCenter.data }))
-      .catch(err => console.log(err));
-    //.then(x => this.updateDogsList());
-  };
-
   updateDogsList = () => {
+    const center = this.state.center;
+
     this._dogService
       .getAllDogs()
-      .then(allDogsFromDB => this.setState({ dogs: allDogsFromDB.data }))
+      .then(allDogsFromDB => {
+        this.centerInfo();
+      })
       .catch(err => console.log("Error", err));
   };
 
@@ -70,7 +78,13 @@ class CenterProfile extends React.Component {
           <section>
             <Row>
               <Col md={4}>
-                <Card style={{ width: "100%", height: "85vh", backgroundColor:"rgba(255,255, 255, 0.5)"}}>
+                <Card
+                  style={{
+                    width: "100%",
+                    height: "85vh",
+                    backgroundColor: "rgba(255,255, 255, 0.5)"
+                  }}
+                >
                   <Card.Img variant="top" src={this.state.center.imgPath} />
                   <Card.Body>
                     <Card.Title style={{ textAlign: "center" }}>
@@ -102,14 +116,25 @@ class CenterProfile extends React.Component {
 
               <Col md={8}>
                 <Row>
-                  <Card style={{ width: "100%", height: "25vh", backgroundColor: "rgba(255,255, 255, 0.5)" }}>
+                  <Card
+                    style={{
+                      width: "100%",
+                      height: "25vh",
+                      backgroundColor: "rgba(255,255, 255, 0.5)"
+                    }}
+                  >
                     <Card.Body>
                       <Card.Title>CALENDARIO</Card.Title>
                       <Card.Text>PROXIMAMENTE</Card.Text>
                     </Card.Body>
                   </Card>
-                  <Card style={{
-                    width: "100%", height: "60vh", backgroundColor: "rgba(255,255, 255, 0.5)" }}>
+                  <Card
+                    style={{
+                      width: "100%",
+                      height: "60vh",
+                      backgroundColor: "rgba(255,255, 255, 0.5)"
+                    }}
+                  >
                     <Card.Body>
                       <Card.Title className="woof-list">
                         WOOF LIST{" "}

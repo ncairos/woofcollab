@@ -4,6 +4,7 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap";
 import calendarService from "../../service/Calendar_service";
+import dogService from "../../service/Dog_service";
 
 const localizer = momentLocalizer(moment);
 
@@ -11,17 +12,53 @@ class MyCalendar extends Component {
   constructor(props) {
     super(props);
     this._calendarService = new calendarService();
+    this._dogService = new dogService();
     this.state = {
+      dog: {},
       showModalWindow: false,
+      mybackup: [],
       myEventsList: [
         {
           title: "",
           start: new Date(""),
           end: new Date("")
         }
-      ]
+      ],
+      showEvents: false
     };
   }
+
+  componentDidMount = () => {
+    this.dogInfo();
+  };
+
+  dogInfo = () => {
+    const dogId = this.props.match.params.id;
+    this._dogService
+      .getOneDog(dogId)
+      .then(theDog =>
+        this.setState({ dog: theDog.data, showEvents: true }, () =>
+          this.showPrevEvents()
+        )
+      )
+      .catch(err => console.log(err));
+  };
+
+  showPrevEvents = () => {
+    let calendarCopy = [...this.state.mybackup];
+    let a, b;
+    this.state.dog.calendar.map(elm => {
+      if (elm.start) a = elm.start.substr(0, 10);
+      b = elm.title;
+      let aux = {
+        title: `${b}`,
+        start: new Date(`${a} 00:00:00`),
+        end: new Date(`${a} 00:00:00`)
+      };
+      calendarCopy.push(aux);
+    });
+    this.setState({ mybackup: calendarCopy });
+  };
 
   handleSubmit = e => {
     const dogId = this.props.match.params.id;
@@ -45,32 +82,28 @@ class MyCalendar extends Component {
       else if (e.target.name.includes("end")) event.end = e.target.value;
       return event;
     });
-    console.log(myEvent);
-
-    this.setState(
-      {
-        myEventsList: myEvent
-      }
-      //console.log(this.state.myEventsList)
-    );
+    this.setState({
+      myEventsList: myEvent
+    });
   };
 
   handleShow = () => this.setState({ showModalWindow: true });
   handleClose = () => this.setState({ showModalWindow: false });
 
   render() {
-    //console.log(this.props.match.params.id)
+    console.log(this.state.dog.calendar);
     return (
       <>
         <Container>
           <section>
-            <Button
-              variant="dark"
-              style={{ display: "block", margin: "0 auto" }}
-              onClick={this.handleShow}
-            >
-              Add an Appointment
-            </Button>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <Button variant="dark" onClick={this.handleShow}>
+                Add an Appointment
+              </Button>
+              <Button variant="dark" onClick={this.handleClick}>
+                See Appointments
+              </Button>
+            </div>
             <Row>
               <Col md={12}>
                 <div
@@ -79,7 +112,7 @@ class MyCalendar extends Component {
                 >
                   <Calendar
                     localizer={localizer}
-                    events={this.state.myEventsList}
+                    events={this.state.mybackup}
                     startAccessor="start"
                     endAccessor="end"
                   />

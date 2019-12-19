@@ -13,4 +13,5 @@ export default class Services {
   postDog = dog => this._service.post("/new", dog);
   getProfile = id => this._service.get(`/profile/${id}`);
   deleteDog = id => this._service.get(`/delete/${id}`);
+  
 }

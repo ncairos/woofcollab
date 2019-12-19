@@ -27,10 +27,12 @@ class DogForm extends Component {
     };
   }
 
-  handleSubmit = e => {
+
+
+  handleSubmit = (e, data) => {
     e.preventDefault();
     this._dogService
-      .postDog(this.state.dog)
+      .postDog(this.state.dog, data)
       .then(x => {
         this.props.closeModalWindow();
         this.props.updateDogsList();
@@ -166,6 +168,7 @@ class DogForm extends Component {
           size="sm"
           type="submit"
           disabled={this.state.disabledButton}
+          onClick={this.handleSubmit}
         >
           {this.state.buttonText}
         </Button>

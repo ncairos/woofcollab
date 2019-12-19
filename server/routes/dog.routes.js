@@ -3,6 +3,7 @@ const router = express.Router();
 const Dog = require("../models/Dog.model");
 const Center = require("../models/Center.model");
 
+
 //----------ALL DOGS----------//
 router.get("/allDogs", (req, res) => {
   Dog.find()
@@ -16,6 +17,8 @@ router.get("/:id", (req, res) => {
   const dogId = req.params.id;
   Dog.findById(dogId)
     .populate("center")
+    .populate("calendar")
+    .populate("comments")
     .then(theDog => {
       console.log(theDog);
       res.json(theDog);
@@ -107,10 +110,15 @@ router.post("/edit/:id", (req, res) => {
 router.get("/profile/:id", (req, res) => {
   const dog = req.params.id;
   Dog.findById(dog)
+
     .populate("calendar")
     .populate("comments")
     .then(theDog => res.json(theDog))
     .catch(err => console.log("DB error", err));
 });
 
+//----------EMAIL REQUEST----------//
+
+
 module.exports = router;
+

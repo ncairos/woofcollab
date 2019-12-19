@@ -25,8 +25,8 @@ class CenterEdit extends Component {
     };
   }
 
-  handleSubmit = () => {
-    this.props.handleSubmit(this.state.center);
+  handleSubmit = e => {
+    this.props.handleSubmit(e, this.state.center);
   };
 
   handleInputChange = e => {

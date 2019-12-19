@@ -58,7 +58,7 @@ class NavigationBar extends Component {
             <Nav className="ml-auto">
               <Navbar.Text>Welcome {saludo}</Navbar.Text>
               <Nav.Link as="li" onClick={this.logoutUser}>
-                Logout
+                <Link to={"/"}>Logout</Link>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -98,7 +98,7 @@ class NavigationBar extends Component {
             <Nav className="ml-auto">
               <Navbar.Text>Welcome {saludo}</Navbar.Text>
               <Nav.Link as="li" onClick={this.logoutUser}>
-                Logout
+                <Link to={"/"}>Logout</Link>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

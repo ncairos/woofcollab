@@ -20,7 +20,7 @@ router.get("/:id", (req, res) => {
 });
 
 //----------EDIT CENTER----------//
-router.post("/edit/:id", (req, res) => {
+router.post("/edit", (req, res) => {
   const {
     email,
     name,
@@ -30,18 +30,23 @@ router.post("/edit/:id", (req, res) => {
     address,
     zipcode,
     imgPath
-  } = req.body;
-  Center.findByIdAndUpdate(req.params.id, {
-    email,
-    name,
-    bio,
-    contact,
-    webpage,
-    address,
-    zipcode,
-    imgPath
-  }, {new: true})
-    .then(() => res.json({ message: "Center has been updated" }))
+  } = req.body.data;
+  console.log(req.body.id);
+  Center.findByIdAndUpdate(
+    req.body.id,
+    {
+      email,
+      name,
+      bio,
+      contact,
+      webpage,
+      address,
+      zipcode,
+      imgPath
+    },
+    { new: true }
+  )
+    .then(center => res.json({ message: "Center has been updated" }))
     .catch(err => console.log(err));
 });
 

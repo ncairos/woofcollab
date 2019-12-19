@@ -23,8 +23,8 @@ class UserEdit extends Component {
     };
   }
 
-  handleSubmit = () => {
-    this.props.handleSubmit(this.state.user);
+  handleSubmit = e => {
+    this.props.handleSubmit(e, this.state.user);
   };
 
   handleInputChange = e => {

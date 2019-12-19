@@ -5,6 +5,9 @@ const bcrypt = require("bcryptjs");
 
 const User = require("../models/User.model");
 const Center = require("../models/Center.model");
+const Dog = require("../models/Dog.model");
+
+const mailer = require("../configs/nodemailer.config");
 
 //----------SIGN UP----------//
 
@@ -180,25 +183,26 @@ authRoutes.post("/loginCenter", (req, res, next) => {
 });
 
 //----------USER PROFILE----------//
-authRoutes.get("/profile/:id", (req, res) => {
-  const user = req.user;
+authRoutes.get("/profile", (req, res) => {
+  const user = req.user._id;
   User.findById(user)
+    .populate("calendar")
+    .populate({
+      path: "calendar",
+      populate: {
+        path: "dog",
+        model: "Dog"
+      }
+    })
     .then(theUser => res.json(theUser))
     .catch(err => console.log("DB error", err));
 });
 
-//----------EDIT CENTER----------//
-authRoutes.post("/edit/:id", (req, res) => {
-  const {
-    email,
-    name,
-    address,
-    imgPath,
-    contact,
-    about,
-  } = req.body;
+//----------EDIT USER----------//
+authRoutes.post("/edit", (req, res) => {
+  const { email, name, address, imgPath, contact, about } = req.body.data;
   User.findByIdAndUpdate(
-    req.params.id,
+    req.body.id,
     {
       email,
       name,
@@ -209,7 +213,7 @@ authRoutes.post("/edit/:id", (req, res) => {
     },
     { new: true }
   )
-    .then(() => res.json({ message: "User has been updated" }))
+    .then(user => res.json({ message: "User has been updated" }))
     .catch(err => console.log(err));
 });
 
@@ -231,5 +235,54 @@ authRoutes.get("/loggedin", (req, res, next) => {
   }
   res.status(403).json({ message: "Unauthorized" });
 });
+
+authRoutes.post("/sendEmail", (req, res, next) => {
+  // console.log("WTFFFF");
+  const dog = req.body.id;
+  // console.log(dog);
+  User.findById(req.user._id).then(user => {
+    console.log("ES EL USEEEER", user);
+    Dog.findById(dog)
+      .populate("center")
+      .then(theRequest => {
+        const message = `<h4>Hello, ${theRequest.center.name} </h4><p>You have a new request for your dog ${theRequest.name}!<br><br>You can get i contact with ${req.user._id} <a href="http://localhost:3000/api/auth/profile/${req.user._id}">`;
+
+        mailer.sendMail({
+          from: '"WoofCollab Team" noreplyt@meat-app.com',
+          to: `${theRequest.center.email}`,
+          subject: `Dog Request ${theRequest.name}`,
+          text: `A request for ${theRequest.name} has been sent`,
+          html: `<p>A request for ${theRequest.name} has been sent</p>`
+        });
+      })
+      .then(() => res.json({ message: "Dog has been requested" }))
+      .catch(err => console.log(err));
+    console.log(user);
+  });
+});
+
+// authRoutes.post("/sendEmail"),
+//   (req, res) => {
+
+// const dog = req.body.id;
+// console.log(dog);
+// User.findById(req.user._id).then(user => {
+//   console.log(user);
+// });
+// Dog.findById(dog).then(x => console.log("soy los detalles", x));
+// .then(theRequest => {
+//   const message = `<h4>Hello, ${theRequest.center.name} </h4><p>You have a new request for your dog ${theRequest.name}!<br><br>You can get i contact with ${req.user._id} <a href="http://localhost:3000/api/auth/profile/${req.user._id}">`;
+
+//   mailer.sendMail({
+//     from: '"WoofCollab Team" noreplyt@meat-app.com',
+//     to: `${theRequest.center.email}`,
+//     subject: `Dog Request ${theRequest.name}`,
+//     text: `A request for ${theRequest.name} has been sent`,
+//     html: `<p>A request for ${theRequest.name} has been sent</p>`
+//   });
+// })
+// .then(() => res.json({ message: "Dog has been requested" }))
+// .catch(err => console.log(err));
+// };
 
 module.exports = authRoutes;
