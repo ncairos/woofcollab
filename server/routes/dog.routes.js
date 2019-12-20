@@ -111,7 +111,7 @@ router.post("/edit/:id", (req, res) => {
 router.get("/profile/:id", (req, res) => {
   const dog = req.params.id;
   Dog.findById(dog)
-
+    .populate("center")
     .populate("calendar")
     .populate({
       path: "calendar",

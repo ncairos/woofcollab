@@ -136,13 +136,26 @@ class CenterProfile extends React.Component {
                       >
                         <h3>Calendario</h3>
                       </Card.Title>
-                      <Card.Text>
-                        {/* {this.state.center.walks
+                      <Card.Text style={{ height: "15vh", overflow: "scroll" }}>
+                        {this.state.center.walks
                           ? this.state.center.walks.map(elm => {
-                              // <p>{elm.calendar.title}</p>;
-                              console.log("hablalooo", elm.calendar);
+                              if (elm.calendar.length !== 0) {
+                                console.log(elm.calendar)
+                                return elm.calendar.map(cal => (
+                                  <p>
+                                    <strong> Booked User: </strong>
+                                    {cal.user.name} |
+                                    <strong> Booked Woof: </strong>
+                                    {cal.dog.name} <br></br>
+                                    <strong> Date: </strong>
+                                    {cal.start.substr(0, 10)} |
+                                    <strong> Booking Name: </strong>
+                                    {cal.title}
+                                  </p>
+                                ));
+                              }
                             })
-                          : null} */}
+                          : null}
                       </Card.Text>
                     </Card.Body>
                   </Card>

@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Center = require("../models/Center.model");
-const Calendar = require("../models/Calendar.model")
+const Calendar = require("../models/Calendar.model");
+const Dog = require("../models/Dog.model");
 
 //----------ALL CENTERS----------//
 router.get("/allCenters", (req, res) => {
@@ -20,7 +21,14 @@ router.get("/:id", (req, res) => {
       path: "walks",
       populate: {
         path: "calendar",
-        model: "Calendar"
+        populate: { path: "dog", model: "Dog" },
+      }
+    })
+    .populate({
+      path: "walks",
+      populate: {
+        path: "calendar",
+        populate: { path: "user", model: "User" },
       }
     })
     .then(theCenter => res.json(theCenter))
