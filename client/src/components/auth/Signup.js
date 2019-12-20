@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, Container, Card, Row, Col } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 
 import Service from "../../service/Auth_service";
 
@@ -18,7 +19,7 @@ class SignupForm extends Component {
       .then(theNewUser => {
         this.props.setUser(theNewUser.data);
         this.setState({ username: "", email: "", password: "" });
-        this.props.history.push("/"); // REDIRECCIONAMIENTO
+        this.props.history.push("/");
       })
       .catch(err => console.log({ err }));
   };
@@ -33,14 +34,16 @@ class SignupForm extends Component {
       <Container style={{ display: "flex", justifyContent: "center" }}>
         <Card
           className="signup-login"
-          text="white"
           style={{ width: "50vw", marginTop: "50px" }}
         >
-          <Card.Header style={{ textAlign: "center", color: "black" }}>
+          <Card.Header
+            className="text-format"
+            style={{ textAlign: "center", color: "grey" }}
+          >
             USER SIGN UP
           </Card.Header>
           <Card.Body>
-            <Card.Text style={{ color: "black" }}>
+            <Card.Text style={{ color: "grey" }}>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>
@@ -82,7 +85,15 @@ class SignupForm extends Component {
                     style={{ display: "flex", justifyContent: "center" }}
                     md={12}
                   >
-                    <Button variant="light" type="submit">
+                    <Button
+                      variant="light"
+                      type="submit"
+                      style={{
+                        color: "grey",
+                        boxShadow: "5px 5px 10px 0px rgba(0, 0, 0, 0.75)",
+                        textTransform: "uppercase"
+                      }}
+                    >
                       Sign Up
                     </Button>
                   </Col>
@@ -96,4 +107,4 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm;
+export default withRouter(SignupForm);

@@ -10,7 +10,7 @@ const CenterCard = ({ _id, name, address, zipcode, imgPath, imgName}) => {
       </Col>
       <Col md={8}>
         <h3>{name}</h3>
-        <Link className="btn btn-sm btn-dark" to={`/centers/${_id}`}>
+        <Link className="btn btn-sm btn-light btn-dets"  to={`/centers/${_id}`}>
           See Details
         </Link>
         <hr></hr>

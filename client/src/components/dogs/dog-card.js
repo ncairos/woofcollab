@@ -4,7 +4,7 @@ const DogCard = ({ name, imgPath, imgName, age, sex }) => {
   return (
     <>
       <img src={imgPath} alt={imgName} />
-      <h3>{name}</h3>
+      <h3 style={{textTransform: "uppercase"}}>{name}</h3>
       <hr></hr>
       <p>
         <strong>Age:</strong> {age} año

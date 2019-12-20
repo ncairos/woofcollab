@@ -36,10 +36,6 @@ const DogModal = props => {
             <Link to={`/centers/${props.center._id}`}>{props.center.name}</Link>
           </p>
         </Col>
-        {/* <Button variant="dark">
-          MORE<br></br>WOOF!
-        </Button> */}
-        {/* <Link to={`/dog/${props._id}`}>MORE WOOF</Link> */}
       </Row>
     </Container>
   );

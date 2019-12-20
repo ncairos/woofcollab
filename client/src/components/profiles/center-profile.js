@@ -75,14 +75,15 @@ class CenterProfile extends React.Component {
     return (
       <>
         <Container>
-          <section>
+          <section style={{ color: "grey" }}>
             <Row>
               <Col md={4}>
                 <Card
                   style={{
                     width: "100%",
                     height: "85vh",
-                    backgroundColor: "rgba(255,255, 255, 0.5)"
+                    backgroundColor: "rgba(255,255, 255, 0.5)",
+                    boxShadow: "10px 10px 15px 0px rgba(0, 0, 0, 0.75)"
                   }}
                 >
                   <Card.Img variant="top" src={this.state.center.imgPath} />
@@ -99,14 +100,14 @@ class CenterProfile extends React.Component {
                       <br />
                       <strong>Webpage:</strong> {this.state.center.webpage}
                       <br />
-                      <strong>Address:</strong> {this.state.center.address}
-                      <br />
-                      <strong>Zipcode:</strong> {this.state.center.zipcode}
+                      <strong>Address:</strong> {this.state.center.address} |
+                      <strong> Zipcode:</strong> {this.state.center.zipcode}
                     </Card.Text>
                     <Button
-                      variant="dark"
+                      variant="light"
                       size="sm"
                       onClick={this.handleShowEdit}
+                      className="btn-profile"
                     >
                       Edit Center
                     </Button>
@@ -114,7 +115,10 @@ class CenterProfile extends React.Component {
                 </Card>
               </Col>
 
-              <Col md={8}>
+              <Col
+                md={8}
+                style={{ boxShadow: "10px 10px 15px 0px rgba(0, 0, 0, 0.75)" }}
+              >
                 <Row>
                   <Card
                     style={{
@@ -124,8 +128,22 @@ class CenterProfile extends React.Component {
                     }}
                   >
                     <Card.Body>
-                      <Card.Title>CALENDARIO</Card.Title>
-                      <Card.Text>PROXIMAMENTE</Card.Text>
+                      <Card.Title
+                        style={{
+                          textAlign: "center",
+                          textTransform: "uppercase"
+                        }}
+                      >
+                        <h3>Calendario</h3>
+                      </Card.Title>
+                      <Card.Text>
+                        {/* {this.state.center.walks
+                          ? this.state.center.walks.map(elm => {
+                              // <p>{elm.calendar.title}</p>;
+                              console.log("hablalooo", elm.calendar);
+                            })
+                          : null} */}
+                      </Card.Text>
                     </Card.Body>
                   </Card>
                   <Card
@@ -137,11 +155,11 @@ class CenterProfile extends React.Component {
                   >
                     <Card.Body>
                       <Card.Title className="woof-list">
-                        WOOF LIST{" "}
                         <Button
-                          variant="dark"
+                          variant="light"
                           size="sm"
                           onClick={this.handleShow}
+                          className="btn-profile"
                         >
                           New Woof!
                         </Button>

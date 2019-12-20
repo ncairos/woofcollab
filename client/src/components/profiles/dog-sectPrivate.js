@@ -17,8 +17,10 @@ class DogSectionPriv extends Component {
             <img src={this.props.imgPath} alt={this.props.imgName} />
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
-                variant="dark"
+                variant="light"
                 size="sm"
+                className="btn-profile"
+                style={{marginTop: "10px"}}
                 onClick={() => this.props.delete(this.props._id)}
               >
                 Delete

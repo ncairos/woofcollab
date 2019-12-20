@@ -23,15 +23,22 @@ class CenterDetails extends Component {
   render() {
     return (
       <>
-        <Container>
+        <Container style={{ color: "grey" }}>
           <section>
             <Row>
               <Col md={4}>
-                <Card style={{ width: "100%", height: "85vh", backgroundColor: "rgba(255,255, 255, 0.5)" }}>
+                <Card
+                  style={{
+                    width: "100%",
+                    height: "85vh",
+                    backgroundColor: "rgba(255,255, 255, 0.5)",
+                    boxShadow: "10px 10px 15px 0px rgba(0, 0, 0, 0.75)"
+                  }}
+                >
                   <Card.Img variant="top" src={this.state.center.imgPath} />
                   <Card.Body>
                     <Card.Title style={{ textAlign: "center" }}>
-                      {this.state.center.name}
+                      <h2>{this.state.center.name}</h2>
                     </Card.Title>
                     <Card.Text>
                       <strong>Bio:</strong> {this.state.center.bio}
@@ -52,9 +59,21 @@ class CenterDetails extends Component {
 
               <Col md={8}>
                 <Row>
-                  <Card style={{ width: "100%", height: "85vh", backgroundColor: "rgba(255,255, 255, 0.5)" }}>
+                  <Card
+                    style={{
+                      width: "100%",
+                      height: "85vh",
+                      backgroundColor: "rgba(255,255, 255, 0.5)",
+                      boxShadow: "10px 10px 15px 0px rgba(0, 0, 0, 0.75)"
+                    }}
+                  >
                     <Card.Body>
-                      <Card.Title className="woof-list">WOOF LIST</Card.Title>
+                      <Card.Title
+                        className="woof-list"
+                        style={{ textAlign: "center" }}
+                      >
+                        <h3>WOOF LIST</h3>
+                      </Card.Title>
                       <Card.Text>
                         <Col className="dog-section2">
                           {this.state.center.walks

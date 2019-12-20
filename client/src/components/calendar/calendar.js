@@ -97,11 +97,8 @@ class MyCalendar extends Component {
         <Container>
           <section>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <Button variant="dark" onClick={this.handleShow}>
+              <Button variant="light" className="btn-profile" onClick={this.handleShow}>
                 Add an Appointment
-              </Button>
-              <Button variant="dark" onClick={this.handleClick}>
-                See Appointments
               </Button>
             </div>
             <Row>

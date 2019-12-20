@@ -56,7 +56,7 @@ class DogProfile extends React.Component {
     console.log(this.state.dog);
     return (
       <>
-        <Container>
+        <Container style={{ color: "grey" }}>
           <section>
             <Row>
               <Col md={4}>
@@ -64,7 +64,8 @@ class DogProfile extends React.Component {
                   style={{
                     width: "100%",
                     height: "85vh",
-                    backgroundColor: "rgba(255,255, 255, 0.5)"
+                    backgroundColor: "rgba(255,255, 255, 0.5)",
+                    boxShadow: "10px 10px 15px 0px rgba(0, 0, 0, 0.75)"
                   }}
                 >
                   <Card.Img variant="top" src={this.state.dog.imgPath} />
@@ -96,7 +97,11 @@ class DogProfile extends React.Component {
                       <strong>Description:</strong> {this.state.dog.description}
                       <br></br>
                     </Card.Text>
-                    <Button variant="dark" onClick={this.handleEmail}>
+                    <Button
+                      variant="light"
+                      className="btn-profile"
+                      onClick={this.handleEmail}
+                    >
                       Request
                     </Button>
                   </Card.Body>
@@ -110,126 +115,143 @@ class DogProfile extends React.Component {
                   flexDirection: "column"
                 }}
               >
-                <Card
+                <div
                   style={{
-                    height: "30vh",
-                    backgroundColor: "rgba(255,255, 255, 0.5)"
+                    boxShadow: "10px 10px 15px 0px rgba(0, 0, 0, 0.75)"
                   }}
                 >
-                  <Card.Body>
-                    <Card.Title style={{ textAlign: "center" }}>
-                      <Link to={`/newCalendar/${this.state.dog._id}`}>
-                        Book an Appointment
-                      </Link>
-                    </Card.Title>
-                    <Card.Text style={{ height: "20vh", overflow: "scroll" }}>
-                      {this.state.dog.calendar
-                        ? this.state.dog.calendar.map(elm => (
-                            <p>
-                              <strong> Booked User: </strong>
-                              {elm.user.name} <br></br>
-                              <strong> Date: </strong>
-                              {elm.start.substr(0, 10)} |
-                              <strong> Booking Name: </strong>
-                              {elm.title}
-                              
-                            </p>
-                          ))
-                        : null}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-                <Col
-                  md={12}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    height: "200px",
-                    padding: "0"
-                  }}
-                >
-                  <Col md={6} style={{ height: "55vh", padding: "0" }}>
-                    <Card
-                      style={{
-                        width: "100%",
-                        height: "55vh",
-                        backgroundColor: "rgba(255,255, 255, 0.5)"
-                      }}
-                    >
-                      <Card.Body>
-                        <Card.Title style={{ textAlign: "center" }}>
-                          <h3>Leave a comment</h3>
-                        </Card.Title>
-                        <Card.Text>
-                          <Form onSubmit={this.handleSubmit}>
-                            <Form.Group>
-                              <Form.Label>Username</Form.Label>
-                              <Form.Control
-                                type="text"
-                                name="name"
-                                onChange={this.handleInputChange}
-                                value={this.state.comment.name}
-                              />
-                            </Form.Group>
-                            <Form.Group>
-                              <Form.Label>Message</Form.Label>
-                              <Form.Control
-                                as="textarea"
-                                type="text"
-                                name="message"
-                                row="5"
-                                onChange={this.handleInputChange}
-                                value={this.state.comment.message}
-                              />
-                            </Form.Group>
-                            <Button
-                              variant="dark"
-                              size="sm"
-                              type="submit"
-                              onClick={this.handleSubmit}
-                            >
-                              Send Comment
-                            </Button>
-                          </Form>
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                  <Col
-                    md={6}
-                    style={{ height: "55vh", padding: "0", overflow: "scroll" }}
+                  <Card
+                    style={{
+                      height: "30vh",
+                      backgroundColor: "rgba(255,255, 255, 0.5)"
+                    }}
                   >
-                    <Card
+                    <Card.Body>
+                      <Card.Title
+                        style={{
+                          textAlign: "center",
+                          textTransform: "uppercase"
+                        }}
+                      >
+                        <Link to={`/newCalendar/${this.state.dog._id}`}>
+                          <h3>Book an Appointment</h3>
+                        </Link>
+                      </Card.Title>
+                      <Card.Text style={{ height: "20vh", overflow: "scroll" }}>
+                        {this.state.dog.calendar
+                          ? this.state.dog.calendar.map(elm => (
+                              <p>
+                                <strong> Booked User: </strong>
+                                {elm.user.name} <br></br>
+                                <strong> Date: </strong>
+                                {elm.start.substr(0, 10)} |
+                                <strong> Booking Name: </strong>
+                                {elm.title}
+                              </p>
+                            ))
+                          : null}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                  <Col
+                    md={12}
+                    style={{
+                      display: "flex",
+                      padding: "0"
+                    }}
+                  >
+                    <Col md={6} style={{ height: "55vh", padding: "0" }}>
+                      <Card
+                        style={{
+                          width: "100%",
+                          height: "55vh",
+                          backgroundColor: "rgba(255,255, 255, 0.5)"
+                        }}
+                      >
+                        <Card.Body>
+                          <Card.Title
+                            style={{
+                              textAlign: "center",
+                              textTransform: "uppercase"
+                            }}
+                          >
+                            <h3>Leave a comment</h3>
+                          </Card.Title>
+                          <Card.Text style={{ marginTop: "50px" }}>
+                            <Form onSubmit={this.handleSubmit}>
+                              <Form.Group>
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control
+                                  type="text"
+                                  name="name"
+                                  onChange={this.handleInputChange}
+                                  value={this.state.comment.name}
+                                />
+                              </Form.Group>
+                              <Form.Group>
+                                <Form.Label>Message</Form.Label>
+                                <Form.Control
+                                  as="textarea"
+                                  type="text"
+                                  name="message"
+                                  row="5"
+                                  onChange={this.handleInputChange}
+                                  value={this.state.comment.message}
+                                />
+                              </Form.Group>
+                              <Button
+                                variant="light"
+                                type="submit"
+                                className="btn-profile"
+                                onClick={this.handleSubmit}
+                              >
+                                Send Comment
+                              </Button>
+                            </Form>
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                    <Col
+                      md={6}
                       style={{
-                        width: "100%",
                         height: "55vh",
-                        background: "none"
+                        padding: "0",
+                        overflow: "scroll"
                       }}
                     >
-                      {this.state.dog.comments
-                        ? this.state.dog.comments.map(elm => (
-                            <Card
-                              style={{
-                                backgroundColor: "rgba(255,255, 255, 0.5)"
-                              }}
-                            >
-                              <Card.Body>
-                                <Card.Text>
-                                  <strong
-                                    style={{ textTransform: "uppercase" }}
-                                  >
-                                    {elm.name}
-                                  </strong>
-                                  <hr></hr>
-                                  {elm.message}
-                                </Card.Text>
-                              </Card.Body>
-                            </Card>
-                          ))
-                        : null}
-                    </Card>
+                      <Card
+                        style={{
+                          width: "100%",
+                          height: "55vh",
+                          background: "none"
+                        }}
+                      >
+                        {this.state.dog.comments
+                          ? this.state.dog.comments.map(elm => (
+                              <Card
+                                style={{
+                                  backgroundColor: "rgba(255,255, 255, 0.5)"
+                                }}
+                              >
+                                <Card.Body>
+                                  <Card.Text>
+                                    <strong
+                                      style={{ textTransform: "uppercase" }}
+                                    >
+                                      {elm.name}
+                                    </strong>
+                                    <hr></hr>
+                                    {elm.message}
+                                  </Card.Text>
+                                </Card.Body>
+                              </Card>
+                            ))
+                          : null}
+                      </Card>
+                    </Col>
                   </Col>
-                </Col>
+                </div>
               </Col>
             </Row>
           </section>

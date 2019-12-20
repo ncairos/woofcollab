@@ -43,7 +43,7 @@ class CenterList extends Component {
                 />
               </div>
             </Col>
-            <Col className="list-group" md={6}>
+            <Col className="list-group" md={6} style={{color: "grey"}}>
               {this.state.centers.map(center => (
                 <CenterCard key={center._id} {...center} />
               ))}

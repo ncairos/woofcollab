@@ -24,8 +24,14 @@ class NavigationBar extends Component {
 
     if (this.props.loggedInUser && this.props.loggedInUser.role === "center") {
       return (
-        <Navbar bg="dark" variant="dark" expand="md">
-          <Navbar.Brand>WoofCollab</Navbar.Brand>
+        <Navbar style={{ backgroundColor: "grey" }} expand="md">
+          <Navbar.Brand>
+            <img
+              className="brand-logo"
+              src="https://res.cloudinary.com/woofcollab/image/upload/v1576787011/dogs/Layer5_xt7mc5.png"
+              alt="logo"
+            />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse>
             <Nav className="mr-auto">
@@ -33,23 +39,12 @@ class NavigationBar extends Component {
                 <Link to="/">Inicio</Link>
               </Nav.Link>
               <Nav.Link as="li">
-                <Link to="/signup">Sign Up</Link>
-              </Nav.Link>
-              <Nav.Link as="li">
-                <Link to="/loginUser">Login</Link>
-              </Nav.Link>
-              <Nav.Link as="li">
-                <Link to="/centers">Centers</Link>
-              </Nav.Link>
-              <Nav.Link as="li">
                 <Link to={`/center-profile/${this.props.loggedInUser._id}`}>
                   Profile
                 </Link>
               </Nav.Link>
               <Nav.Link as="li">
-                <Link to={"/center-calendar"} >
-                  Calendar
-                </Link>
+                <Link to="/centers">Centers</Link>
               </Nav.Link>
               <Nav.Link as="li">
                 <Link to="/dogs">Adoption</Link>
@@ -69,8 +64,14 @@ class NavigationBar extends Component {
       this.props.loggedInUser.role === "user"
     ) {
       return (
-        <Navbar bg="dark" variant="dark" expand="md">
-          <Navbar.Brand>WoofCollab</Navbar.Brand>
+        <Navbar style={{ backgroundColor: "grey" }} expand="md">
+          <Navbar.Brand>
+            <img
+              className="brand-logo"
+              src="https://res.cloudinary.com/woofcollab/image/upload/v1576787011/dogs/Layer5_xt7mc5.png"
+              alt="logo"
+            />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse>
             <Nav className="mr-auto">
@@ -78,19 +79,14 @@ class NavigationBar extends Component {
                 <Link to="/">Inicio</Link>
               </Nav.Link>
               <Nav.Link as="li">
-                <Link to="/signup">Sign Up</Link>
-              </Nav.Link>
-              <Nav.Link as="li">
-                <Link to="/loginUser">Login</Link>
-              </Nav.Link>
-              <Nav.Link as="li">
-                <Link to="/centers">Centers</Link>
-              </Nav.Link>
-              <Nav.Link as="li">
                 <Link to={`/user-profile/${this.props.loggedInUser._id}`}>
                   Profile
                 </Link>
               </Nav.Link>
+              <Nav.Link as="li">
+                <Link to="/centers">Centers</Link>
+              </Nav.Link>
+
               <Nav.Link as="li">
                 <Link to="/dogs">Adoption</Link>
               </Nav.Link>
@@ -106,8 +102,14 @@ class NavigationBar extends Component {
       );
     } else {
       return (
-        <Navbar bg="dark" variant="dark" expand="md">
-          <Navbar.Brand>WoofCollab</Navbar.Brand>
+        <Navbar style={{ backgroundColor: "grey" }} expand="md">
+          <Navbar.Brand>
+            <img
+              className="brand-logo"
+              src="https://res.cloudinary.com/woofcollab/image/upload/v1576787011/dogs/Layer5_xt7mc5.png"
+              alt="logo"
+            />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse>
             <Nav className="mr-auto">

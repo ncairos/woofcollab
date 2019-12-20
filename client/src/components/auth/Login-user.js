@@ -43,14 +43,13 @@ class LoginUserForm extends Component {
       <Container style={{ display: "flex", justifyContent: "center" }}>
         <Card
           className="signup-login"
-          text="white"
           style={{ width: "50vw", marginTop: "50px" }}
         >
-          <Card.Header style={{ textAlign: "center", color: "black" }}>
+          <Card.Header style={{ textAlign: "center", color: "grey" }}>
             USER LOGIN
           </Card.Header>
           <Card.Body>
-            <Card.Text style={{ color: "black" }}>
+            <Card.Text style={{ color: "grey" }}>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>
@@ -75,7 +74,15 @@ class LoginUserForm extends Component {
                     style={{ display: "flex", justifyContent: "center" }}
                     md={12}
                   >
-                    <Button variant="light" type="submit">
+                    <Button
+                      variant="light"
+                      type="submit"
+                      style={{
+                        color: "grey",
+                        boxShadow: "5px 5px 10px 0px rgba(0, 0, 0, 0.75)",
+                        textTransform: "uppercase"
+                      }}
+                    >
                       Login
                     </Button>
                   </Col>
@@ -87,7 +94,6 @@ class LoginUserForm extends Component {
                       to="/loginCenter"
                       style={{
                         marginTop: "15px",
-                        color: "black",
                         textTransform: "uppercase"
                       }}
                     >
@@ -105,7 +111,6 @@ class LoginUserForm extends Component {
 }
 
 export default LoginUserForm;
-
 
 // import { withRouter } from "react-router-dom"
 // export default withRouter(loginUser)

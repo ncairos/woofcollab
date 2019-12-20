@@ -45,17 +45,17 @@ class UserProfile extends React.Component {
   handleCloseEdit = () => this.setState({ showModalEdit: false });
 
   render() {
-    console.log(this.state.user.calendar);
     return (
       <>
         <Container>
-          <section>
+          <section className="user-profile">
             <Row>
               <Col md={6}>
                 <Card
                   style={{
                     height: "85vh",
-                    backgroundColor: "rgba(255,255, 255, 0.5)"
+                    backgroundColor: "rgba(255,255, 255, 0.5)",
+                    boxShadow: "10px 10px 15px 0px rgba(0, 0, 0, 0.75)"
                   }}
                 >
                   <Card.Img
@@ -71,7 +71,7 @@ class UserProfile extends React.Component {
                         textTransform: "uppercase"
                       }}
                     >
-                      <h2>Hello {this.state.user.name}</h2>
+                      <h2>Hello {this.state.user.username}</h2>
                     </Card.Title>
                     <Card.Text>
                       <strong>Email</strong>
@@ -92,9 +92,9 @@ class UserProfile extends React.Component {
                       <br></br>
                     </Card.Text>
                     <Button
-                      variant="dark"
-                      size="sm"
+                      variant="light"                
                       onClick={this.handleShowEdit}
+                      className="btn-profile"
                     >
                       Edit User
                     </Button>
@@ -107,7 +107,8 @@ class UserProfile extends React.Component {
                   style={{
                     height: "85vh",
                     backgroundColor: "rgba(255,255, 255, 0.5)",
-                    overflow: "scroll"
+                    overflow: "scroll",
+                    boxShadow: "10px 10px 15px 0px rgba(0, 0, 0, 0.75)"
                   }}
                 >
                   <Card.Body>
@@ -136,7 +137,7 @@ class UserProfile extends React.Component {
                               <Link to={`/centers/${elm.dog.center}`}>
                                 Go to Center
                               </Link>
-                              <hr></hr>                        
+                              <hr></hr>
                             </p>
                           ))
                         : null}

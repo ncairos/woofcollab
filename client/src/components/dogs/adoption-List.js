@@ -42,12 +42,16 @@ class AdoptList extends Component {
   render() {
     return (
       <section>
-        <Container>
+        <Container style={{ color: "grey" }}>
           <Row>
             {this.state.dogs.map(dog => (
               <Col className="dog-card" md={3}>
                 <DogCard key={dog._id} {...dog} />
-                <Button variant="dark" onClick={() => this.setDog(dog)}>
+                <Button
+                  variant="light"
+                  className="btn-profile"
+                  onClick={() => this.setDog(dog)}
+                >
                   See More
                 </Button>
                 <hr></hr>

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Center = require("../models/Center.model");
+const Calendar = require("../models/Calendar.model")
 
 //----------ALL CENTERS----------//
 router.get("/allCenters", (req, res) => {
@@ -15,6 +16,13 @@ router.get("/:id", (req, res) => {
   const centerId = req.params.id;
   Center.findById(centerId)
     .populate("walks")
+    .populate({
+      path: "walks",
+      populate: {
+        path: "calendar",
+        model: "Calendar"
+      }
+    })
     .then(theCenter => res.json(theCenter))
     .catch(err => console.log("DB error", err));
 });

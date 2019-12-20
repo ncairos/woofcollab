@@ -236,6 +236,7 @@ authRoutes.get("/loggedin", (req, res, next) => {
   res.status(403).json({ message: "Unauthorized" });
 });
 
+//----------SEND EMAIL-----//
 authRoutes.post("/sendEmail", (req, res, next) => {
   // console.log("WTFFFF");
   const dog = req.body.id;
@@ -245,14 +246,14 @@ authRoutes.post("/sendEmail", (req, res, next) => {
     Dog.findById(dog)
       .populate("center")
       .then(theRequest => {
-        const message = `<h4>Hello, ${theRequest.center.name} </h4><p>You have a new request for your dog ${theRequest.name}!<br><br>You can get i contact with ${req.user._id} <a href="http://localhost:3000/api/auth/profile/${req.user._id}">`;
+        const message = `<h4>Hello, ${theRequest.center.name} </h4><p>You have a new request for your dog ${theRequest.name}!<br><br>Get in contact with the user ${req.user.username}`;
 
         mailer.sendMail({
           from: '"WoofCollab Team" noreplyt@meat-app.com',
           to: `${theRequest.center.email}`,
           subject: `Dog Request ${theRequest.name}`,
-          text: `A request for ${theRequest.name} has been sent`,
-          html: `<p>A request for ${theRequest.name} has been sent</p>`
+          text: message,
+          html: message
         });
       })
       .then(() => res.json({ message: "Dog has been requested" }))
