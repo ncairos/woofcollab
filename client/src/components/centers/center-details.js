@@ -91,45 +91,6 @@ class CenterDetails extends Component {
           </section>
         </Container>
       </>
-
-      // <Container className="center-details">
-      //   <section>
-      //     <Row>
-      //       <Col mr={6}>
-      //         <h2>{this.state.center.name}</h2>
-      //         <div>
-      //           <p>
-      //             <strong>Contact Details</strong>
-      //           </p>
-      //           <span>Phone Number: {this.state.center.contact}</span>
-      //           <br></br>
-      //           <span>Webpage: {this.state.center.webpage}</span>
-      //           <br></br>
-      //           <span>
-      //             Address: {this.state.center.address} | Zipcode:{" "}
-      //             {this.state.center.zipcode}
-      //           </span>
-      //           <br></br>
-      //         </div>
-      //         <hr></hr>
-      //         <Link to="/centers" className="btn btn-dark">
-      //           Back to List
-      //         </Link>
-      //       </Col>
-      //       <Col mr={4}>
-      //         <img
-      //           src={this.state.center.imgPath}
-      //           alt={this.state.center.imgName}
-      //         ></img>
-      //         <Col mr={12}>
-      //           {this.state.center.walks
-      //             ? this.state.center.walks.map(elm => <p>{elm.name}</p>)
-      //             : null}
-      //         </Col>
-      //       </Col>
-      //     </Row>
-      //   </section>
-      // </Container>
     );
   }
 }

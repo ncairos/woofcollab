@@ -31,13 +31,10 @@ class Map extends Component {
         this.setState({ centers: allCentersFromDB.data });
         const addressesCopy = [...this.state.addresses];
         this.state.centers.forEach(elm => {
-          //console.log(elm.address);
           Geocode.fromAddress(elm.address)
             .then(
               response => {
-                //console.log(response);
                 const { lat, lng } = response.results[0].geometry.location;
-                //console.log(lat, lng);
                 addressesCopy.push({ lat, lng });
                 this.setState({
                   address: { lat, lng },
@@ -49,20 +46,18 @@ class Map extends Component {
               }
             )
             .catch(err => console.log(err));
-        }); // esto me da todas las coordenadas
+        });
       })
       .catch(err => console.log("Error", err));
   };
 
   setCenter = center => {
-    //console.log(center)
-    this.setState ({
+    this.setState({
       selectedCenter: center
-    })
-  }
+    });
+  };
 
   handleToggleOpen = idx => {
-    //console.log(idx);
     this.setState({
       isOpen: true
     });
@@ -90,9 +85,14 @@ class Map extends Component {
           </>
         ))}
         {this.state.selectedCenter && (
-          <InfoWindow position={this.state.selectedCenter} onCloseClick={() => { this.setCenter(null) }}>
+          <InfoWindow
+            position={this.state.selectedCenter}
+            onCloseClick={() => {
+              this.setCenter(null);
+            }}
+          >
             <small>
-              {this.state.selectedCenter.lat}, {(this.state.selectedCenter.lng)}
+              {this.state.selectedCenter.lat}, {this.state.selectedCenter.lng}
             </small>
           </InfoWindow>
         )}

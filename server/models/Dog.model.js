@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
+//--------------------MODELS--------------------//
+
 const Calendar = require("./Calendar.model");
 const Comment = require("./Comment.model")
 

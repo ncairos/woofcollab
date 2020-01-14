@@ -96,7 +96,8 @@ class DogProfile extends React.Component {
                       <br></br>
                       <strong>Description:</strong> {this.state.dog.description}
                       <br></br>
-                      <strong>Center:</strong> <Link>{this.state.dog.centerName}</Link>
+                      <strong>Center:</strong>{" "}
+                      <Link>{this.state.dog.centerName}</Link>
                       <br></br>
                     </Card.Text>
                     <Button

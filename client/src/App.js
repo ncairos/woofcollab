@@ -99,5 +99,3 @@ class App extends Component {
 }
 
 export default App;
-
-//render={() => this.state.loggedInUser.role === "center" ? <CenterList loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />}

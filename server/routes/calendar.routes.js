@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
+
+//--------------------MODELS--------------------//
+
 const Calendar = require("../models/Calendar.model");
 const Dog = require("../models/Dog.model");
 const User = require("../models/User.model");
+
+//--------------------NEW CALENDAR--------------------//
 
 router.post("/new/:id", (req, res) => {
   const user = req.user;
@@ -23,7 +28,7 @@ router.post("/new/:id", (req, res) => {
           {
             $addToSet: { calendar: theCalendar._id }
           },
-          { new: true } 
+          { new: true }
         )
           .then(user => res.json({ theCalendar, dog, user }))
           .catch(err => console.log("DB error", err));

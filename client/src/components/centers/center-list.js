@@ -20,7 +20,6 @@ class CenterList extends Component {
     this._service
       .getAllCenters()
       .then(allCentersFromDB =>
-        // {console.log(allCentersFromDB)
         {
           this.setState({ centers: allCentersFromDB.data });
         }

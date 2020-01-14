@@ -19,17 +19,13 @@ class AdoptList extends Component {
   componentDidMount = () => {
     this._service
       .getAllDogs()
-      .then(allDogsFromDB =>
-        // {console.log(allDogsFromDB)
-        {
-          this.setState({ dogs: allDogsFromDB.data });
-        }
-      )
+      .then(allDogsFromDB => {
+        this.setState({ dogs: allDogsFromDB.data });
+      })
       .catch(err => console.log("Error", err));
   };
 
   setDog = dog => {
-    //console.log(dog)
     this.setState({
       selectedDog: dog,
       showModalWindow: true

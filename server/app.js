@@ -3,12 +3,16 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
+//--------------------CONFIGS--------------------//
+
 require("./configs/mongoose.config");
 require("./configs/debugger.config");
 require("./configs/middlewares.config")(app);
 require("./configs/view-engine.config")(app);
 require("./configs/locals.config")(app);
 require("./configs/session.config")(app);
+
+//--------------------ROUTES--------------------//
 
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/center", require("./routes/center.routes"));

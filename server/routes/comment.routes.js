@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
+
+//--------------------MODELS--------------------//
+
 const Comment = require("../models/Comment.model");
 const Dog = require("../models/Dog.model");
 const User = require("../models/User.model");
+
+//--------------------NEW COMMENT--------------------//
 
 router.post("/new/:id", (req, res) => {
   const user = req.user;

@@ -1,10 +1,14 @@
 const express = require("express");
 const router = express.Router();
+
+//--------------------MODELS--------------------//
+
 const Center = require("../models/Center.model");
 const Calendar = require("../models/Calendar.model");
 const Dog = require("../models/Dog.model");
 
-//----------ALL CENTERS----------//
+//--------------------ALL CENTERS--------------------//
+
 router.get("/allCenters", (req, res) => {
   Center.find()
     .populate("walks")
@@ -12,7 +16,8 @@ router.get("/allCenters", (req, res) => {
     .catch(err => console.log("DB error", err));
 });
 
-//----------DETAILS CENTER----------//
+//--------------------DETAILS CENTER--------------------//
+
 router.get("/:id", (req, res) => {
   const centerId = req.params.id;
   Center.findById(centerId)
@@ -21,21 +26,22 @@ router.get("/:id", (req, res) => {
       path: "walks",
       populate: {
         path: "calendar",
-        populate: { path: "dog", model: "Dog" },
+        populate: { path: "dog", model: "Dog" }
       }
     })
     .populate({
       path: "walks",
       populate: {
         path: "calendar",
-        populate: { path: "user", model: "User" },
+        populate: { path: "user", model: "User" }
       }
     })
     .then(theCenter => res.json(theCenter))
     .catch(err => console.log("DB error", err));
 });
 
-//----------EDIT CENTER----------//
+//--------------------EDIT CENTER--------------------//
+
 router.post("/edit", (req, res) => {
   const {
     email,

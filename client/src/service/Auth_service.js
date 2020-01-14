@@ -27,7 +27,6 @@ export default class Services {
     return this._service.get("/loggedin");
   };
   sentEmail = id => {
-    console.log(id);
     this._service.post(`/sendEmail`, { id });
   };
 }

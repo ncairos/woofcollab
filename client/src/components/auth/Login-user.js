@@ -30,7 +30,7 @@ class LoginUserForm extends Component {
       .then(theLoggedUser => {
         this.props.setUser(theLoggedUser.data);
         this.setState({ username: "", password: "" });
-        this.props.history.push("/"); // REDIRECCIONAMIENTO
+        this.props.history.push("/");
       })
       .catch(err => {});
   };
@@ -111,6 +111,3 @@ class LoginUserForm extends Component {
 }
 
 export default LoginUserForm;
-
-// import { withRouter } from "react-router-dom"
-// export default withRouter(loginUser)

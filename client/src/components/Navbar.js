@@ -14,13 +14,14 @@ class NavigationBar extends Component {
       .logout()
       .then(() => this.props.setUser(false))
       .catch(err => console.log(err));
-    //this.props.history.push("/")
   };
 
   render() {
     const saludo = this.props.loggedInUser
       ? this.props.loggedInUser.username
       : "Guest";
+
+    //--------------------CENTER NAVBAR--------------------//
 
     if (this.props.loggedInUser && this.props.loggedInUser.role === "center") {
       return (
@@ -60,6 +61,8 @@ class NavigationBar extends Component {
         </Navbar>
       );
     } else if (
+      //--------------------USER NAVBAR--------------------//
+
       this.props.loggedInUser &&
       this.props.loggedInUser.role === "user"
     ) {

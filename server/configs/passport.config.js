@@ -1,9 +1,12 @@
-const User = require("../models/User.model");
-const Center = require("../models/Center.model");
-
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
+
+//--------------------MODELS--------------------//
+
+const User = require("../models/User.model");
+const Center = require("../models/Center.model");
+
 
 passport.serializeUser((loggedInUser, done) => {
   if (loggedInUser instanceof User) {

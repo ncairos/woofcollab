@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
+//--------------------MODELS--------------------//
+
 const Dog = require("./Dog.model")
 
 const commentSchema = new Schema(

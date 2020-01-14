@@ -27,8 +27,6 @@ class DogForm extends Component {
     };
   }
 
-
-
   handleSubmit = (e, data) => {
     e.preventDefault();
     this._dogService
